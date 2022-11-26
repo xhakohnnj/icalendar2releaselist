@@ -1,2 +1,3 @@
-py main.py 2022/11/23 2022/12/31
+py main.py output.txt 2022/11/22 2022/12/31
+
 pause
