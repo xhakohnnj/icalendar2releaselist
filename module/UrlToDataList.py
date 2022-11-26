@@ -11,8 +11,12 @@ class eDataIndex(IntEnum):
   Options = auto()
 
 
+# 文字列から日付に変換
+def StrToDate( str ):
+  return datetime.strptime( str.replace('/','-'),'%Y-%m-%d' )
+
 # main
-def Main( url ):
+def Main( url, date_start_str, date_end_str ):
 
   lines = None
   with urllib.request.urlopen(url) as f:
@@ -23,11 +27,14 @@ def Main( url ):
   ical_data = []
   for line in lines:
     ical_data.append( line.decode().strip() )
-  del lines # 必要なくなったので削除しておく
-  
-  # 簡単なデータを先に作りたい
+  del lines # 必要なくなったので破棄しておく
+
+  date_start = StrToDate( date_start_str )
+  date_end = StrToDate( date_end_str )
+
+  # 元データを作成
   data_sources = []
-  data_source = None
+  data_source = None # あまり凝らずにとりあえず配列で.
   for item in ical_data:
     if iCalLib.HasTag(item,iCalLib.eTag.Begin):
       data_source = [None,None,None] # eDataIndexと合わせる
@@ -40,10 +47,16 @@ def Main( url ):
       data_source[eDataIndex.Name] = iCalLib.GetTagValue( item )
     elif iCalLib.HasTag(item,iCalLib.eTag.Description):
       data_source[eDataIndex.Options] = iCalLib.GetTagValue( item )
+  
+  # iCalに登録されてるのが日付順じゃないのでソートする.
+  data_sources.sort()
 
   release_title_data_list = []
   for data_source in data_sources:
-    # @todo 日付の範囲
+    # 日付の範囲
+    if not date_start <= data_source[eDataIndex.Date] <= date_end:
+      continue
+
     release_title_data_list.append(
       ReleaseTitleData.Data(
         data_source[eDataIndex.Date]
