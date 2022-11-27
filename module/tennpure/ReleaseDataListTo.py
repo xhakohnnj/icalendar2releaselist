@@ -1,3 +1,6 @@
+#
+# リリースデータリストから出力
+#
 from .lib import Lib
 
 
@@ -14,7 +17,7 @@ def File( output_file, release_list, gamepass_in_list, gamepass_out_list ):
   WriteFile( '【Xbox リリース スケジュール】' )
   WriteFile( '☆: Xbox Seres X|S 最適化　●: アップグレード対応　◇: ゲームパス対応' )
   WriteFile( '' )
-  Lib.ForeachDataListConvTennpureFormat( release_list, lambda item: WriteFile( item ) )
+  Lib.ForeachReleaseDataListConvTennpureFormat( release_list, lambda item: WriteFile( item ) )
   WriteFile( '' )
   WriteFile( '' )
   WriteFile( '' )
@@ -25,7 +28,7 @@ def File( output_file, release_list, gamepass_in_list, gamepass_out_list ):
   WriteFile( '' )
   WriteFile( '【ゲームパス & EAPlay】' )
   WriteFile( '≪IN≫' )
-  Lib.ForeachDataListConvTennpureFormat( gamepass_in_list, lambda item: WriteFile( item ) )
+  Lib.ForeachReleaseDataListConvTennpureFormat( gamepass_in_list, lambda item: WriteFile( item ) )
   WriteFile( '' )
   WriteFile( '≪OUT≫' )
-  Lib.ForeachDataListConvTennpureFormat( gamepass_out_list, lambda item: WriteFile( item ) )
+  Lib.ForeachReleaseDataListConvTennpureFormat( gamepass_out_list, lambda item: WriteFile( item ) )

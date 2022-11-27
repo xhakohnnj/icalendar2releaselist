@@ -1,22 +1,28 @@
+#
+# iCalendarからリリースデータのリストに変換
+# URL指定版.
+#
 from enum import IntEnum, auto
 from datetime import datetime
 import urllib.request
 from .lib import iCalLib
-from .data import ReleaseTitleData
+from . import Datas
 
-
-class eDataIndex(IntEnum):
+# データの配列のインデックス
+class eDataSourceIndex(IntEnum):
   Date = 0 # 最初のauto()は1になるとのことで。
   Name = auto()
   Options = auto()
 
 
-# 文字列から日付に変換
-def StrToDate( str ):
-  return datetime.strptime( str.replace('/','-'),'%Y-%m-%d' )
-
+#
 # main
+#
 def Main( url, date_start_str, date_end_str ):
+
+  # 文字列から日付に変換
+  def StrToDate( str ):
+    return datetime.strptime( str.replace('/','-'),'%Y-%m-%d' )
 
   lines = None
   with urllib.request.urlopen(url) as f:
@@ -42,11 +48,11 @@ def Main( url, date_start_str, date_end_str ):
       data_sources.append( data_source )
       data_source = None
     elif iCalLib.HasTag(item,iCalLib.eTag.DateStart):
-      data_source[eDataIndex.Date] = datetime.strptime( iCalLib.GetTagValue(item), '%Y%m%d' )
+      data_source[eDataSourceIndex.Date] = datetime.strptime( iCalLib.GetTagValue(item), '%Y%m%d' )
     elif iCalLib.HasTag(item,iCalLib.eTag.Summary):
-      data_source[eDataIndex.Name] = iCalLib.GetTagValue( item )
+      data_source[eDataSourceIndex.Name] = iCalLib.GetTagValue( item )
     elif iCalLib.HasTag(item,iCalLib.eTag.Description):
-      data_source[eDataIndex.Options] = iCalLib.GetTagValue( item )
+      data_source[eDataSourceIndex.Options] = iCalLib.GetTagValue( item )
   
   # iCalに登録されてるのが日付順じゃないのでソートする.
   data_sources.sort()
@@ -54,14 +60,14 @@ def Main( url, date_start_str, date_end_str ):
   release_title_data_list = []
   for data_source in data_sources:
     # 日付の範囲
-    if not date_start <= data_source[eDataIndex.Date] <= date_end:
+    if not date_start <= data_source[eDataSourceIndex.Date] <= date_end:
       continue
 
     release_title_data_list.append(
-      ReleaseTitleData.Data(
-        data_source[eDataIndex.Date]
-        , data_source[eDataIndex.Name]
-        , data_source[eDataIndex.Options]
+      Datas.ReleaseData(
+        data_source[eDataSourceIndex.Date]
+        , data_source[eDataSourceIndex.Name]
+        , data_source[eDataSourceIndex.Options]
       )
     )
 

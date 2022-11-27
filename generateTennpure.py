@@ -3,8 +3,8 @@
 # 
 import sys
 from enum import IntEnum
-from module import UrlToDataList
-from module.tennpure import DataListTo as GenerateTennpureTo
+from module import iCalToReleaseDataListWithURL
+from module.tennpure import ReleaseDataListTo as GenerateTennpureTo
 
 
 # 引数
@@ -23,11 +23,11 @@ url_gamepass_out = "https://calendar.google.com/calendar/ical/c04a293ee84ddbbfb3
 
 
 # リリースカレンダー
-release_list = UrlToDataList.Main( url_release_calendar, sys.argv[Args.DATE_START], sys.argv[Args.DATE_END] )
+release_list = iCalToReleaseDataListWithURL.Main( url_release_calendar, sys.argv[Args.DATE_START], sys.argv[Args.DATE_END] )
 # ゲームパス IN
-gamepass_in_list = UrlToDataList.Main( url_gamepass_in, sys.argv[Args.DATE_START], sys.argv[Args.DATE_END] )
+gamepass_in_list = iCalToReleaseDataListWithURL.Main( url_gamepass_in, sys.argv[Args.DATE_START], sys.argv[Args.DATE_END] )
 # ゲームパス OUT
-gamepass_out_list = UrlToDataList.Main( url_gamepass_out, sys.argv[Args.DATE_START], sys.argv[Args.DATE_END] )
+gamepass_out_list = iCalToReleaseDataListWithURL.Main( url_gamepass_out, sys.argv[Args.DATE_START], sys.argv[Args.DATE_END] )
 
 # テンプレ出力
 with open( sys.argv[Args.OUTPUT_FILE], mode='w', encoding='utf-8', newline='\n' ) as output_file:

@@ -1,5 +1,7 @@
+#
+# iCalendar関連ライブラリ
+#
 from enum import Enum
-
 
 # タグ
 class eTag(Enum):
@@ -10,9 +12,16 @@ class eTag(Enum):
   Summary     = "SUMMARY"         # 予定タイトル
   Description = "DESCRIPTION"     # 説明欄
 
+
+#
+# タグがあるかどうか
+#
 def HasTag( str, tag ):
   return -1 < str.find(tag.value)
 
+#
+# タグの値を取得
+#
 def GetTagValue( str ):
   return str.split(":",1)[-1]
 

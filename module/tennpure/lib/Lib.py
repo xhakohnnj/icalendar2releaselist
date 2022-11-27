@@ -2,18 +2,19 @@
 # テンプレ関係のライブラリ
 #
 
+
 #
 # データリストをテンプレのフォーマットに変換して各アイテムごとにコールバックを呼び出す.
 #
 # date_list   データリスト
 # func        データ1つに行う処理
 #
-def ForeachDataListConvTennpureFormat( data_list, func, *args ):
+def ForeachReleaseDataListConvTennpureFormat( release_data_list, func, *args ):
   year_tmp = None
   output_year = False
   insert_newline = False
 
-  for data in data_list:
+  for data in release_data_list:
     if year_tmp is None:
       year_tmp = data.date.year
 
