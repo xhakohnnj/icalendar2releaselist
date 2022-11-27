@@ -9,9 +9,9 @@ from module.tennpure import ReleaseDataListTo as GenerateTennpureTo
 
 # 引数
 class Args(IntEnum):
-  OUTPUT_FILE   = 1   # 出力ファイル
-  DATE_START    = 2   # 日付の範囲(開始)
-  DATE_END      = 3   # 日付の範囲(終了)
+    OUTPUT_FILE     = 1     # 出力ファイル
+    DATE_START      = 2     # 日付の範囲(開始)
+    DATE_END        = 3     # 日付の範囲(終了)
 
 # 各種URL定義
 # リリースカレンダー
@@ -31,4 +31,4 @@ gamepass_out_list = iCalToReleaseDataListWithURL.Main( url_gamepass_out, sys.arg
 
 # テンプレ出力
 with open( sys.argv[Args.OUTPUT_FILE], mode='w', encoding='utf-8', newline='\n' ) as output_file:
-  GenerateTennpureTo.File( output_file, release_list, gamepass_in_list, gamepass_out_list )
+    GenerateTennpureTo.File( output_file, release_list, gamepass_in_list, gamepass_out_list )
