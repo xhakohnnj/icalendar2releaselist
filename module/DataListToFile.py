@@ -32,7 +32,7 @@ def Main( output_file, data_list ):
       insert_newline = False
 
     if not data.options == None and 0 < len(data.options): # なんかNoneじゃなくて空白も入ってるところもあるのでlenでもチェック.
-      item += '　{0}'.format( data.options )
+      item += ' {0}'.format( data.options )
     print( item )
     if not output_file is None:
       output_file.write( item + '\n' )
