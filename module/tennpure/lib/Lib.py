@@ -1,10 +1,14 @@
 #
-# リストからファイルに出力
+# テンプレ関係のライブラリ
 #
-# output_file     出力先のファイル
-# date_list       リスト
+
 #
-def Main( output_file, data_list ):
+# データリストをテンプレのフォーマットに変換して各アイテムごとにコールバックを呼び出す.
+#
+# date_list   データリスト
+# func        データ1つに行う処理
+#
+def ForeachDataListConvTennpureFormat( data_list, func, *args ):
   year_tmp = None
   output_year = False
   insert_newline = False
@@ -33,6 +37,4 @@ def Main( output_file, data_list ):
 
     if not data.options == None and 0 < len(data.options): # なんかNoneじゃなくて空白も入ってるところもあるのでlenでもチェック.
       item += ' {0}'.format( data.options )
-    print( item )
-    if not output_file is None:
-      output_file.write( item + '\n' )
+    func( item )

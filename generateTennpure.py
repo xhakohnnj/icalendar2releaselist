@@ -4,7 +4,7 @@
 import sys
 from enum import IntEnum
 from module import UrlToDataList
-from module import DataListToFile
+from module.tennpure import DataListTo as GenerateTennpureTo
 
 
 # 引数
@@ -29,25 +29,6 @@ gamepass_in_list = UrlToDataList.Main( url_gamepass_in, sys.argv[Args.DATE_START
 # ゲームパス OUT
 gamepass_out_list = UrlToDataList.Main( url_gamepass_out, sys.argv[Args.DATE_START], sys.argv[Args.DATE_END] )
 
-
+# テンプレ出力
 with open( sys.argv[Args.OUTPUT_FILE], mode='w', encoding='utf-8', newline='\n' ) as output_file:
-  output_file.write( 'テンプレ 1\n' )
-  output_file.write( '----------\n' )
-  output_file.write( '【Xbox リリース スケジュール】\n' )
-  output_file.write( '☆: Xbox Seres X|S 最適化　●: アップグレード対応　◇: ゲームパス対応\n' )
-  output_file.write( '\n' )
-  DataListToFile.Main( output_file, release_list )
-  output_file.write( '\n' )
-  output_file.write( '\n' )
-  output_file.write( '\n' )
-  output_file.write( 'テンプレ 2\n' )
-  output_file.write( '----------\n' )
-  output_file.write( '【XBOXゲームスペシャル】\n' )
-  output_file.write( 'ttps://www.microsoft.com/ja-jp/store/deals/games/xbox\n' )
-  output_file.write( '\n' )
-  output_file.write( '【ゲームパス & EAPlay】\n' )
-  output_file.write( '≪IN≫\n' )
-  DataListToFile.Main( output_file, gamepass_in_list )
-  output_file.write( '\n' )
-  output_file.write( '≪OUT≫\n' )
-  DataListToFile.Main( output_file, gamepass_out_list )
+  GenerateTennpureTo.File( output_file, release_list, gamepass_in_list, gamepass_out_list )
