@@ -2,16 +2,16 @@
 # テンプレ出力
 # 
 import sys
-from enum import IntEnum
-from module import iCalToReleaseDataListWithURL
+from enum import IntEnum, auto
+from module import iCalToReleaseDataList
 from module.tennpure import ReleaseDataListTo as GenerateTennpureTo
 
 
 # 引数
 class Args(IntEnum):
-    OUTPUT_FILE     = 1     # 出力ファイル
-    DATE_START      = 2     # 日付の範囲(開始)
-    DATE_END        = 3     # 日付の範囲(終了)
+    OUTPUT_FILE     = 1         # 出力ファイル
+    DATE_START      = auto()    # 日付の範囲(開始)
+    DATE_END        = auto()    # 日付の範囲(終了)
 
 # 各種URL定義
 # リリースカレンダー
@@ -23,11 +23,11 @@ url_gamepass_out = "https://calendar.google.com/calendar/ical/c04a293ee84ddbbfb3
 
 
 # リリースカレンダー
-release_list = iCalToReleaseDataListWithURL.Main( url_release_calendar, sys.argv[Args.DATE_START], sys.argv[Args.DATE_END] )
+release_list = iCalToReleaseDataList.WithURL( url_release_calendar, sys.argv[Args.DATE_START], sys.argv[Args.DATE_END] )
 # ゲームパス IN
-gamepass_in_list = iCalToReleaseDataListWithURL.Main( url_gamepass_in, sys.argv[Args.DATE_START], sys.argv[Args.DATE_END] )
+gamepass_in_list = iCalToReleaseDataList.WithURL( url_gamepass_in, sys.argv[Args.DATE_START], sys.argv[Args.DATE_END] )
 # ゲームパス OUT
-gamepass_out_list = iCalToReleaseDataListWithURL.Main( url_gamepass_out, sys.argv[Args.DATE_START], sys.argv[Args.DATE_END] )
+gamepass_out_list = iCalToReleaseDataList.WithURL( url_gamepass_out, sys.argv[Args.DATE_START], sys.argv[Args.DATE_END] )
 
 # テンプレ出力
 with open( sys.argv[Args.OUTPUT_FILE], mode='w', encoding='utf-8', newline='\n' ) as output_file:

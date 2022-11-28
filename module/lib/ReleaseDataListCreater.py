@@ -1,46 +1,24 @@
 #
-# iCalendarからリリースデータのリストに変換
-# URL指定版.
+# リリースデータリスト作成
 #
 from enum import IntEnum, auto
 from datetime import datetime
-import urllib.request
-from .lib import iCalLib
-from . import Datas
-
-# データの配列のインデックス
-class eDataSourceIndex(IntEnum):
-    Date      = 0 # 最初のauto()は1になるとのことで。
-    Name      = auto()
-    Options   = auto()
+from ..lib import iCalLib
+from .. import Datas
 
 
-#
-# main
-#
-def Main( url, date_start_str, date_end_str ):
-    # 文字列から日付に変換
-    def StrToDate( str ):
-      return datetime.strptime( str.replace('/','-'),'%Y-%m-%d' )
+# 作成
+def Create( ical_lines, date_start, date_end ):
+    # データの配列のインデックス
+    class eDataSourceIndex(IntEnum):
+        Date      = 0 # 最初のauto()は1になるとのことで。
+        Name      = auto()
+        Options   = auto()
 
-    lines = None
-    with urllib.request.urlopen(url) as f:
-      lines = f.readlines()
-    if lines is None:
-      return None
-
-    ical_data = []
-    for line in lines:
-      ical_data.append( line.decode().strip() )
-    del lines # 必要なくなったので破棄しておく
-
-    date_start = StrToDate( date_start_str )
-    date_end = StrToDate( date_end_str )
-
-    # 元データを作成
+    # 元データ(iCalを解析して整えたデータ)を作成
     data_sources = []
     data_source = None # あまり凝らずにとりあえず配列で.
-    for item in ical_data:
+    for item in ical_lines:
       if iCalLib.HasTag(item,iCalLib.eTag.Begin):
         data_source = [None,None,None] # eDataIndexと合わせる
       elif iCalLib.HasTag(item,iCalLib.eTag.End):
