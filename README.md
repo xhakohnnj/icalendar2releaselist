@@ -4,20 +4,23 @@ iCalendarからテンプレを作成。
 
 最初はテンプレに張り付けるリストの作成にするつもりだったのでプロジェクト名がそんな感じに。
 
-## 機能
+## 使用に関して
 
-+ Google カレンダーからテンプレを作成。
++ 「XBOX総合スレ 　第４避難所」での使用のみ許可します。(なんか偉そうな言い方になってもうた。)
 
-## 動作
+## 機能と動作
 
-+ ネットワークを通じてGoogleカレンダーから iCalendar 形式でファイルを取得します。
-+ 取得した iCalendar を解析してテンプレートに成型し、出力します。
++ Google カレンダーからテンプレを出力。
+  + ネットワークを通じてGoogleカレンダーから iCalendar 形式でファイルを取得します。
+  + 取得した iCalendar を解析してテンプレートに成型し、出力します。
++ iCalendarファイルからテンプレを出力
+  + ローカルPC内にある iCalendar 形式のファイルからテンプレートを出力できます。
 
 ## 必要環境
 
 + Python 3.8.5
   + 開発時の環境になります。
-  + 動作するならバージョンが違っても大丈夫なはず…
+  + 動作するならバージョンが違っても大丈夫だと思う。たぶん。
 
 ## 使用方法
 
@@ -27,8 +30,11 @@ iCalendarからテンプレを作成。
 
 ## 実行方法
 
+### Googleカレンダーから出力
+
 実行は下記のコマンドになります。
 引数は任意のものに置き換えてください。
+なお、GoogleカレンダーのURLはツール内で定義していますので変更の際はそちらを編集してください。
 
 ``` bat
 py generateTennpure.py 出力ファイル名 開始日時 終了日時
@@ -38,6 +44,21 @@ py generateTennpure.py 出力ファイル名 開始日時 終了日時
 
 ``` bat
 py generateTennpure.py output.txt 2022/11/22 2022/11/30
+```
+
+### iCalendarファイルから出力
+
+実行は下記のコマンドになります。
+引数は任意のものに置き換えてください。
+
+``` bat
+py generateTennpureWithFile.py 出力ファイル名 発売日のiCalendarファイル名 ゲームパスINのiCalendarファイル名 ゲームパスOUTのiCalendarファイル名 開始日時 終了日時
+```
+
+例えばこんな感じになります。
+
+``` bat
+py generateTennpureWithFile.py output.txt release.ics gamepass_in.ics gamepass_out.ics 2022/11/22 2023/03/31
 ```
 
 ---
@@ -57,3 +78,10 @@ py generateTennpure.py output.txt 2022/11/22 2022/11/30
 ### iCalendarを取得するカレンダーのURL
 
 + 処理内にて定義。
+
+---
+
+## 履歴
+
++ 2022/11/29
+  + いったん完成。
