@@ -61,6 +61,16 @@ py generateTennpureWithFile.py 出力ファイル名 発売日のiCalendarファ
 py generateTennpureWithFile.py output.txt release.ics gamepass_in.ics gamepass_out.ics 2022/11/22 2023/03/31
 ```
 
+### Googleカレンダー、iCalendarの入力について
+
+解析する際、カレンダーの入力項目については下記のように扱っていますので、これを踏まえた入力内容でお願いします。
+
+|扱い|Googleカレンダー|iCalendar|備考|
+|---|---|---|---|
+|ゲームタイトル|予定のタイトル|SUMMARY||
+|リリース日(発売日、配信日)|予定の開始日時|DTSTART||
+|最適化、アップグレード、ゲームパスの記号|予定の説明|DESCRIPTION|最後に説明欄をくっつけてます。なのでここに何か書いてるものは記号に限らずくっついてしまいます。|
+
 ---
 
 以下は開発者向け。
