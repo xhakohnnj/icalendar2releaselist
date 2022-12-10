@@ -36,6 +36,4 @@ def ForeachReleaseDataListConvTennpureFormat( release_data_list, func, *args ):
         item = '\n' + item
         insert_newline = False
 
-      if not data.options == None and 0 < len(data.options): # なんかNoneじゃなくて空白も入ってるところもあるのでlenでもチェック.
-        item += ' {0}'.format( data.options )
       func( item )

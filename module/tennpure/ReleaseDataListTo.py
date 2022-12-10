@@ -15,7 +15,6 @@ def File( output_file, release_list, gamepass_in_list, gamepass_out_list ):
     WriteFile( 'テンプレ 1' )
     WriteFile( '----------' )
     WriteFile( '【Xbox リリース スケジュール】' )
-    WriteFile( '☆: Xbox Seres X|S 最適化　●: アップグレード対応　◇: ゲームパス対応' )
     WriteFile( '' )
     Lib.ForeachReleaseDataListConvTennpureFormat( release_list, lambda item: WriteFile( item ) )
     WriteFile( '' )
