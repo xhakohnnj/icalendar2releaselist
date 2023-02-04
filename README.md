@@ -37,13 +37,14 @@ iCalendarからテンプレを作成。
 なお、GoogleカレンダーのURLはツール内で定義していますので変更の際はそちらを編集してください。
 
 ``` bat
-py generateTennpure.py 出力ファイル名 開始日時 終了日時
+py generateTennpure.py 出力ファイル名 発売タイトルの開始日時 発売タイトルの終了日時 ゲームパスの開始日時 ゲームパスの終了日時
 ```
 
-例えば下記のようにすると *2022年11月22日*から*2022年11月30日*までの間の内容を*output.txt*に出力します。
+例えば下記のようにすると発売タイトルは*2023年1月29日*から*2023年12月31日*までの間の内容で
+ゲームパスは*2023年2月1日*から*2023年2月28日*までの間の内容で*output.txt*に出力します。
 
 ``` bat
-py generateTennpure.py output.txt 2022/11/22 2022/11/30
+py generateTennpure.py output.txt 2023/01/29 2023/12/31 2023/02/01 2023/02/28
 ```
 
 ### iCalendarファイルから出力
@@ -52,13 +53,13 @@ py generateTennpure.py output.txt 2022/11/22 2022/11/30
 引数は任意のものに置き換えてください。
 
 ``` bat
-py generateTennpureWithFile.py 出力ファイル名 発売日のiCalendarファイル名 ゲームパスINのiCalendarファイル名 ゲームパスOUTのiCalendarファイル名 開始日時 終了日時
+py generateTennpureWithFile.py 出力ファイル名 発売日のiCalendarファイル名 ゲームパスINのiCalendarファイル名 ゲームパスOUTのiCalendarファイル名 発売タイトルの開始日時 発売タイトルの終了日時 ゲームパスの開始日時 ゲームパスの終了日時
 ```
 
 例えばこんな感じになります。
 
 ``` bat
-py generateTennpureWithFile.py output.txt release.ics gamepass_in.ics gamepass_out.ics 2022/11/22 2023/03/31
+py generateTennpureWithFile.py output.txt release.ics gamepass_in.ics gamepass_out.ics 2023/01/29 2023/12/31 2023/02/01 2023/02/28
 ```
 
 ### Googleカレンダー、iCalendarの入力について
@@ -93,5 +94,9 @@ py generateTennpureWithFile.py output.txt release.ics gamepass_in.ics gamepass_o
 
 ## 履歴
 
++ 2023/02/04
+  + 発売タイトルとゲームパスとで期間を別々にした。
+    発売タイトルに合わせた期間にした時、まだ消えてほしくないゲームパスのタイトルが消えてしまうので。
+    例えば、2月の始めに2月1日から2月末までの期間でテンプレを作った時に、1月末のゲームパスOUTは残っててほしいみたいな。
 + 2022/11/29
   + いったん完成。
