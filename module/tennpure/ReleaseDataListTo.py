@@ -7,7 +7,7 @@ from .lib import Lib
 #
 # ファイルに出力
 #
-def File( output_file, release_list, gamepass_in_list, gamepass_out_list ):
+def File( output_file, release_list, gamepass_in_list, gamepass_out_list, gameevents_list ):
     def WriteFile( str ):
       output_file.write( str + '\n' )
       print( str )
@@ -31,3 +31,7 @@ def File( output_file, release_list, gamepass_in_list, gamepass_out_list ):
     WriteFile( '' )
     WriteFile( '≪OUT≫' )
     Lib.ForeachReleaseDataListConvTennpureFormat( gamepass_out_list, lambda item: WriteFile( item ) )
+    if gameevents_list is not None and 0 < len(gameevents_list):
+      WriteFile( '' )
+      WriteFile( '【イベント】' )
+      Lib.ForeachReleaseDataListConvTennpureFormat( gameevents_list, lambda item: WriteFile( item ) )

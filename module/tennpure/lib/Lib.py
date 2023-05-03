@@ -26,9 +26,15 @@ def ForeachReleaseDataListConvTennpureFormat( release_data_list, func, *args ):
 
       date = None
       if output_year is True:
-        date = data.date.strftime('%Y/%m/%d')
+        if data.useTime:
+          date = data.date.strftime('%Y/%m/%d %H:%S')
+        else:
+          date = data.date.strftime('%Y/%m/%d')
       else:
-        date = data.date.strftime('%m/%d')
+        if data.useTime:
+          date = data.date.strftime('%m/%d %H:%S')
+        else:
+          date = data.date.strftime('%m/%d')
       item = '{0}　{1}'.format( date, data.title )
 
       # 改行を頭に.
