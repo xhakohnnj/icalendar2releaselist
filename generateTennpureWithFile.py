@@ -13,10 +13,13 @@ class Args(IntEnum):
     INPUT_FILE_RELEASE          = auto()    # 入力ファイル(発売日)
     INPUT_FILE_GAMEPASS_IN      = auto()    # 入力ファイル(ゲームパスIN)
     INPUT_FILE_GAMEPASS_OUT     = auto()    # 入力ファイル(ゲームパスOUT)
+    INPUT_FILE_GAMEEVENTS       = auto()    # 入力ファイル(イベント)
     TITLE_RELEASE_DATE_START    = auto()    # 発売タイトルの日付の範囲(開始)
     TITLE_RELEASE_DATE_END      = auto()    # 発売タイトルの日付の範囲(終了)
     GAME_PASS_DATE_START        = auto()    # ゲームパスの日付の範囲(開始)
     GAME_PASS_DATE_END          = auto()    # ゲームパスの日付の範囲(終了)
+    GAME_EVENTS_DATE_START      = auto()    # イベントの日付の範囲(開始)
+    GAME_EVENTS_DATE_END        = auto()    # イベントの日付の範囲(終了)
 
 # リリースカレンダー
 release_list = iCalToReleaseDataList.WithFile( sys.argv[Args.INPUT_FILE_RELEASE], sys.argv[Args.TITLE_RELEASE_DATE_START], sys.argv[Args.TITLE_RELEASE_DATE_END] )
@@ -24,7 +27,9 @@ release_list = iCalToReleaseDataList.WithFile( sys.argv[Args.INPUT_FILE_RELEASE]
 gamepass_in_list = iCalToReleaseDataList.WithFile( sys.argv[Args.INPUT_FILE_GAMEPASS_IN], sys.argv[Args.GAME_PASS_DATE_START], sys.argv[Args.GAME_PASS_DATE_END] )
 # ゲームパス OUT
 gamepass_out_list = iCalToReleaseDataList.WithFile( sys.argv[Args.INPUT_FILE_GAMEPASS_OUT], sys.argv[Args.GAME_PASS_DATE_START], sys.argv[Args.GAME_PASS_DATE_END] )
+# イベント
+gameevent_list = iCalToReleaseDataList.WithFile( sys.argv[Args.INPUT_FILE_GAMEEVENTS], sys.argv[Args.GAME_EVENTS_DATE_START], sys.argv[Args.GAME_EVENTS_DATE_END] )
 
 # テンプレ出力
 with open( sys.argv[Args.OUTPUT_FILE], mode='w', encoding='utf-8', newline='\n' ) as output_file:
-    GenerateTennpureTo.File( output_file, release_list, gamepass_in_list, gamepass_out_list )
+    GenerateTennpureTo.File( output_file, release_list, gamepass_in_list, gamepass_out_list, gameevent_list )
